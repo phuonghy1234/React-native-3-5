@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="message">Number Guessing Game in HTML</div>
+    <p>History Guessing Number:</p>
+    <div id="guessedNumbers"></div>
+    <input type="number" id="number" />
+    <button id="guessBtn">Button1</button>
+
+    <script>
+      let result = Math.round(Math.random() * 10);
+      let button = document.getElementById("guessBtn");
+
+      let count = 0;
+
+      let max = 10;
+
+      button.addEventListener("click", function() {
+        console.log("result now is: " + result);
+        let guessInput = document.getElementById("number");
+        let userGuess = guessInput.value;
+        let messageDiv = document.getElementById("message");
+        let guessedNumber = document.getElementById("guessedNumbers");
+        let guessedText = guessedNumber.innerHTML;
+
+        if (userGuess === "" || max - count == 0) return;
+        count++;
+
+        if (userGuess == result) {
+          messageDiv.innerHTML = "Congratulations!! you guessed correctly.";
+          messageDiv.style.background = "#66FF66";
+          guessedNumber.innerHTML = guessedText + userGuess + "<br/>";
+          return;
+        } else if (userGuess > result) {
+          messageDiv.innerHTML =
+            "Sorry your guess is too high! You have: " +
+            (max - count) +
+            " guesses left <br/>";
+          messageDiv.style.background = "red";
+          guessedNumber.innerHTML = guessedText + userGuess + "<br/>";
+        } else {
+          messageDiv.innerHTML =
+            "Sorry your guess is too low! You have: " +
+            (max - count) +
+            " guesses left <br/>";
+          messageDiv.style.backgroundColor = "red";
+          guessedNumber.innerHTML = guessedText + userGuess + "<br/>";
+        }
+      });
+    </script>
+  </body>
+</html>
